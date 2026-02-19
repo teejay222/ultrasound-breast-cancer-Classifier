@@ -12,8 +12,8 @@
 6. [Results and Discussion](#6-results-and-discussion)
 7. [Repository Structure](#7-repository-structure)
 8. [How to Run the Project](#8-how-to-run-the-project)
-9. [Limitations and Future Work](#10-limitations-and-future-work)
-10. [Acknowledgements](#12-acknowledgements)
+9. [Limitations and Future Work](#9-limitations-and-future-work)
+10. [Acknowledgements](#10-acknowledgements)
 
 ---
 
@@ -36,11 +36,14 @@ The Breast Ultrasound Images Dataset (BUSI) has been widely used in prior studie
 ## 3. Dataset
 
 The project uses the Breast Ultrasound Images Dataset (BUSI), which consists of ultrasound images grouped into three classes:
-- Normal <img width="368" height="270" alt="normal (1)" src="https://github.com/user-attachments/assets/d32be2ba-d8ae-4443-8bd4-ee6098db2ab0" /> 
+- Normal
+- <img width="268" height="170" alt="normal (1)" src="https://github.com/user-attachments/assets/d32be2ba-d8ae-4443-8bd4-ee6098db2ab0" /> 
 
-- Benign <img width="357" height="273" alt="benign (2)" src="https://github.com/user-attachments/assets/bb1c71f6-f862-48fc-b864-d24f383d0508" />
+- Benign
+- <img width="268" height="170" alt="benign (2)" src="https://github.com/user-attachments/assets/bb1c71f6-f862-48fc-b864-d24f383d0508" />
 
-- Malignant <img width="349" height="298" alt="malignant (1)" src="https://github.com/user-attachments/assets/b81889cf-1e30-473a-99aa-44c8faa309db" />
+- Malignant
+- <img width="268" height="170" alt="malignant (1)" src="https://github.com/user-attachments/assets/b81889cf-1e30-473a-99aa-44c8faa309db" />
 
 
 **Dataset Source:** [https://www.kaggle.com/datasets/sabahesaraki/breast-ultrasound-images-dataset](url)
