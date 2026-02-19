@@ -155,6 +155,7 @@ Visual results include:
 ---
 
 ## 7. Repository Structure
+```
 ├── src/                  # Core datasets, training engine, and utilities
 │   ├── datasets/         # Dataset classes and data loaders
 │   ├── engine/           # Training and evaluation loops
@@ -165,8 +166,8 @@ Visual results include:
 │   └── data_split.py
 ├── notebooks/             # Experimental notebooks and analysis
 │   ├── Custom Model - Masked data- Experiment 3.ipynb
-│   ├── Custom Model with Orignal Data - Experiment 1.ipynb
-│   ├── Transfer Learning-AlexNet - Expriment 5.ipynb
+│   ├── Custom Model with Original Data - Experiment 1.ipynb
+│   ├── Transfer Learning-AlexNet - Experiment 5.ipynb
 │   ├── Transfer Learning-RESNET50- Experiment 2.ipynb
 │   └── final plots of results.ipynb
 ├── configs/               # YAML configuration files
@@ -176,6 +177,7 @@ Visual results include:
 ├── run.py                 # Main training entry point
 ├── requirements.txt       # Project dependencies
 └── README.md              # This file
+```
 
 
 
