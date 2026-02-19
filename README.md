@@ -162,27 +162,27 @@ Visual results include:
 ---
 
 ## 7. Repository Structure
-├── src/ # Core datasets, training engine, and utilities
-│ ├── datasets/ # Dataset classes and data loaders
-│ ├── engine/ # Training and evaluation loops
-│ └── utils/ # Device management utilities
-├── tools/ # Data download and preprocessing scripts
-│ ├── data_downloader.py
-│ ├── data_preprocessing.py
-│ └── data_split.py
-├── notebooks/ # Experimental notebooks and analysis
-│ ├── Custom Model - Masked data- Experiment 3.ipynb
-│ ├── Custom Model with Orignal Data - Experiment 1.ipynb
-│ ├── Transfer Learning-AlexNet - Expriment 5.ipynb
-│ ├── Transfer Learning-RESNET50- Experiment 2.ipynb
-│ └── final plots of results.ipynb
-├── configs/ # YAML configuration files
-│ ├── cnn_model_config.yml
-│ ├── data_config.yaml
-│ └── training_config.yaml
-├── run.py # Main training entry point
-├── requirements.txt # Project dependencies
-└── README.md # This file
+├── src/                  # Core datasets, training engine, and utilities
+│   ├── datasets/         # Dataset classes and data loaders
+│   ├── engine/           # Training and evaluation loops
+│   └── utils/            # Device management utilities
+├── tools/                 # Data download and preprocessing scripts
+│   ├── data_downloader.py
+│   ├── data_preprocessing.py
+│   └── data_split.py
+├── notebooks/             # Experimental notebooks and analysis
+│   ├── Custom Model - Masked data- Experiment 3.ipynb
+│   ├── Custom Model with Orignal Data - Experiment 1.ipynb
+│   ├── Transfer Learning-AlexNet - Expriment 5.ipynb
+│   ├── Transfer Learning-RESNET50- Experiment 2.ipynb
+│   └── final plots of results.ipynb
+├── configs/               # YAML configuration files
+│   ├── cnn_model_config.yml
+│   ├── data_config.yaml
+│   └── training_config.yaml
+├── run.py                 # Main training entry point
+├── requirements.txt       # Project dependencies
+└── README.md              # This file
 
 
 
