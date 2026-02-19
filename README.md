@@ -39,7 +39,7 @@ The project uses the Breast Ultrasound Images Dataset (BUSI), which consists of 
 - `               Normal                                 Benign                             Malignant     `
 - <img width="268" height="170" alt="normal (1)" src="https://github.com/user-attachments/assets/d32be2ba-d8ae-4443-8bd4-ee6098db2ab0" />  <img width="268" height="170" alt="benign (2)" src="https://github.com/user-attachments/assets/bb1c71f6-f862-48fc-b864-d24f383d0508" />  <img width="268" height="170" alt="malignant (1)" src="https://github.com/user-attachments/assets/b81889cf-1e30-473a-99aa-44c8faa309db" />
 
-**Dataset Source:** [https://www.kaggle.com/datasets/sabahesaraki/breast-ultrasound-images-dataset](url)
+**Dataset Source:** https://www.kaggle.com/datasets/sabahesaraki/breast-ultrasound-images-dataset
 
 **Dataset Statistics:**
 
