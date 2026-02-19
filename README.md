@@ -9,21 +9,19 @@ This repository contains a deep learning project for **classifying breast cancer
 # Ultrasound Breast Cancer Classification Using Deep Learning
 
 ## Table of Contents
-1. Project Overview
-2. Related Work
-3. Dataset
-4. Methodology
-   - Data Preprocessing
-   - Model Architectures
-   - Training Strategy
-5. Evaluation Metrics
-6. Results and Discussion
-7. Repository Structure
-8. How to Run the Project
-9. Poster and Slides
-10. Limitations and Future Work
-11. References
-12. Acknowledgements
+1. [Project Overview](#1-project-overview)
+2. [Related Work](#2-related-work)
+3. [Dataset](#3-dataset)
+4. [Methodology](#4-methodology)
+   - [Data Preprocessing](#data-preprocessing)
+   - [Model Architectures](#model-architectures)
+   - [Training Strategy](#training-strategy)
+5. [Evaluation Metrics](#5-evaluation-metrics)
+6. [Results and Discussion](#6-results-and-discussion)
+7. [Repository Structure](#7-repository-structure)
+8. [How to Run the Project](#8-how-to-run-the-project)
+9. [Limitations and Future Work](#10-limitations-and-future-work)
+10. [Acknowledgements](#12-acknowledgements)
 
 ---
 
@@ -46,9 +44,26 @@ The Breast Ultrasound Images Dataset (BUSI) has been widely used in prior studie
 ## 3. Dataset
 
 The project uses the Breast Ultrasound Images Dataset (BUSI), which consists of ultrasound images grouped into three classes:
-- Normal
-- Benign
-- Malignant
+- Normal <img width="568" height="470" alt="normal (1)" src="https://github.com/user-attachments/assets/d32be2ba-d8ae-4443-8bd4-ee6098db2ab0" />
+
+- Benign <img width="557" height="473" alt="benign (2)" src="https://github.com/user-attachments/assets/bb1c71f6-f862-48fc-b864-d24f383d0508" />
+
+- Malignant <img width="449" height="598" alt="malignant (1)" src="https://github.com/user-attachments/assets/b81889cf-1e30-473a-99aa-44c8faa309db" />
+
+
+**Dataset Source:** [https://www.kaggle.com/datasets/sabahesaraki/breast-ultrasound-images-dataset](url)
+
+**Dataset Statistics:**
+
+| Class      | Number of Images | Percentage |
+|------------|----------------|-----------|
+| Normal     | 133            | 17%       |
+| Benign     | 437            | 56%       |
+| Malignant  | 210            | 27%       |
+| Total      | 780            | 100%      |
+
+- Image resolution: 500 × 500 pixels
+
 
 For benign and malignant cases, corresponding ground-truth lesion masks are available. These masks are used in one experimental setup to generate overlay images that emphasize lesion regions.
 
@@ -66,57 +81,57 @@ The preprocessing pipeline includes:
 - RGB conversion
 - Label extraction from directory structure
 - Generation of an overlay dataset using lesion masks:
-  - Background regions are darkened for benign and malignant images
+  - Background regions are darkened (80% reduction) for benign and malignant images
   - Normal images remain unchanged
-
-![Data Preprocessing Pipeline](assets/preprocessing_pipeline.png)
-
----
 
 ### Model Architectures
 
 Five model configurations were implemented and evaluated:
 
-1. Custom CNN trained from scratch using original images  
-2. ResNet50 with transfer learning (ImageNet pretrained)  
-3. Custom CNN trained on mask-overlay images with hyperparameter optimization  
-4. Custom CNN baseline variant with reduced training schedule  
-5. AlexNet with transfer learning (ImageNet pretrained)
+| Experiment | Model | Data | Key Features |
+|------------|-------|------|--------------|
+| 1 | Custom CNN | Original | Class weights, balanced sampler, 75 epochs |
+| 2 | ResNet50 | Original | Transfer learning, frozen backbone |
+| 3 | Custom CNN | Overlay (masked) | Hyperparameter-optimized, 75 epochs |
+| 4 | Custom CNN | Original | Adam optimizer, no class weights, 35 epochs |
+| 5 | AlexNet | Original | Transfer learning, frozen features, 20 epochs |
 
-![Custom CNN Architecture](assets/custom_cnn_architecture.png)
-![Transfer Learning Architecture](assets/transfer_learning_architecture.png)
+**Custom CNN Architecture:**
+- 4 convolutional blocks (32 → 64 → 128 → 256 filters)
+- BatchNorm + ReLU after each convolution
+- MaxPooling after each block
+- AdaptiveAvgPool2d to 7×7
+- Classifier: 3 linear layers with Dropout(0.4)
 
----
+  <img width="1795" height="935" alt="image" src="https://github.com/user-attachments/assets/335eb78b-3183-4d8b-86df-feb4ea69c16a" />
+
 
 ### Training Strategy
 
 All models are trained using supervised learning with cross-entropy loss.
 
 Training configuration includes:
-- Optimizers: SGD and AdamW
-- Learning rate scheduling with cosine annealing and warm-up
-- Variable batch sizes depending on experiment
-- GPU acceleration when available
+- **Optimizers**: SGD (with momentum) and AdamW
+- **Learning rate scheduling**: Cosine annealing with warm-up (5 epochs)
+- **Batch size**: 32 (variable in HPO experiments)
+- **Class imbalance handling**: WeightedRandomSampler + weighted CrossEntropyLoss
+- **Hardware**: GPU acceleration when available
 
-To address class imbalance, weighted loss functions and weighted sampling are applied, with a focus on improving malignant class sensitivity.
-
-![Training Workflow](assets/training_workflow.png)
+<img width="1523" height="757" alt="image" src="https://github.com/user-attachments/assets/983bc9cd-33ec-4be4-b173-92e0bda1efab" />
 
 ---
 
 ## 5. Evaluation Metrics
 
 Model performance is evaluated using the following metrics:
-- Accuracy
+
 - Precision
 - Recall (Sensitivity)
 - F1-Score
-- F2-Score (recall-oriented)
-- Balanced Accuracy
-- ROC-AUC for malignant class
+- Accuracy
 - Confusion Matrix
 
-Malignant detection is additionally treated as a binary classification task to reflect clinical screening priorities.
+Malignant detection is additionally treated as a binary classification task with threshold tuning to achieve ≥95% recall, reflecting clinical screening priorities.
 
 ---
 
@@ -124,33 +139,78 @@ Malignant detection is additionally treated as a binary classification task to r
 
 All models are evaluated on a held-out test set using consistent evaluation metrics.
 
+### Key Results
+
+| Model | Malignant Recall | Malignant Precision | Accuracy | Balanced Accuracy |
+|-------|-----------------|---------------------|----------|-------------------|
+| Custom CNN + Overlay (Exp 3) | **94%** | 84% | 94% | 95% |
+| Custom CNN (Exp 1) | **94%** | 84% | 87% | 95% |
+| Custom CNN + Adam (Exp 4) | 91% | 88% | 82% | 88% |
+| AlexNet (Exp 5) | 88% | 85% | 79% | 86% |
+| ResNet50 (Exp 2) | 64% | 70% | 74% | 72% |
+
+**Best Model Performance (Custom CNN + Overlay):**
+- Malignant: 94% recall, 84% precision, F1-score 0.89
+- Benign: 97% precision, 92% recall
+- Normal: 100% precision, 100% recall
+
 Visual results include:
 - Training and validation loss curves
 - Training and validation accuracy curves
 - Confusion matrices
-- ROC curves for malignant detection
 
-![Loss Curve](Loss Curve.png)
-![Accuracy Curve](Accuracy Curve.png)
+<img width="685" height="507" alt="image" src="https://github.com/user-attachments/assets/adeeb6f0-c2a7-43d8-96e7-be88041021b8" />
+<img width="603" height="152" alt="image" src="https://github.com/user-attachments/assets/f5f42832-166d-424d-b984-ebc59aa9268b" />
+<img width="1271" height="537" alt="image" src="https://github.com/user-attachments/assets/f70b35da-8b8f-48a4-b040-b7a97f82f1d5" />
 
-Additional result visualizations are available in:
-- `notebooks/final plots of results.ipynb`
 
 ---
 
 ## 7. Repository Structure
+├── src/ # Core datasets, training engine, and utilities
+│ ├── datasets/ # Dataset classes and data loaders
+│ ├── engine/ # Training and evaluation loops
+│ └── utils/ # Device management utilities
+├── tools/ # Data download and preprocessing scripts
+│ ├── data_downloader.py
+│ ├── data_preprocessing.py
+│ └── data_split.py
+├── notebooks/ # Experimental notebooks and analysis
+│ ├── Custom Model - Masked data- Experiment 3.ipynb
+│ ├── Custom Model with Orignal Data - Experiment 1.ipynb
+│ ├── Transfer Learning-AlexNet - Expriment 5.ipynb
+│ ├── Transfer Learning-RESNET50- Experiment 2.ipynb
+│ └── final plots of results.ipynb
+├── configs/ # YAML configuration files
+│ ├── cnn_model_config.yml
+│ ├── data_config.yaml
+│ └── training_config.yaml
+├── run.py # Main training entry point
+├── requirements.txt # Project dependencies
+└── README.md # This file
 
 
-## Dataset
 
-The dataset used in this project is the **[Dataset Name]**, containing **N images** of ultrasound breast scans.
+---
 
-| Class      | Number of Images | Percentage |
-|------------|----------------|-----------|
-| Benign     | XXX            | XX%       |
-| Malignant  | XXX            | XX%       |
-| Total      | XXX            | 100%      |
+## 8. How to Run the Project
 
-**Dataset Source:** [Provide URL or reference]
+Always run the following commands from the project root directory.
 
-**Folder Structure Example:**
+```bash
+python -m tools.data_downloader
+python -m tools.data_preprocessing
+python run.py
+
+---
+
+## 9. Limitations and Future Work
+
+The project is limited by dataset size and lack of external validation. Classification is performed independently from segmentation.
+
+Future work may include attention-based models, vision transformers, multi-task learning, and clinical decision threshold calibration.
+
+
+## 10. Acknowledgements
+
+This project was developed as part of an academic coursework submission. The authors acknowledge the creators of the BUSI dataset and the open-source deep learning community.
