@@ -1,12 +1,4 @@
-# Ultrasound Breast Cancer Image Classification
-
-![Project Banner](path_to_your_banner_image.png)
-
-This repository contains a deep learning project for **classifying breast cancer from ultrasound images**. The model is designed to accurately distinguish between **benign** and **malignant** cases using state-of-the-art convolutional neural networks.
-
----
-
-# Ultrasound Breast Cancer Classification Using Deep Learning
+# Ultrasound Breast Cancer Classification
 
 ## Table of Contents
 1. [Project Overview](#1-project-overview)
@@ -44,11 +36,11 @@ The Breast Ultrasound Images Dataset (BUSI) has been widely used in prior studie
 ## 3. Dataset
 
 The project uses the Breast Ultrasound Images Dataset (BUSI), which consists of ultrasound images grouped into three classes:
-- Normal <img width="568" height="470" alt="normal (1)" src="https://github.com/user-attachments/assets/d32be2ba-d8ae-4443-8bd4-ee6098db2ab0" />
+- Normal <img width="368" height="270" alt="normal (1)" src="https://github.com/user-attachments/assets/d32be2ba-d8ae-4443-8bd4-ee6098db2ab0" /> 
 
-- Benign <img width="557" height="473" alt="benign (2)" src="https://github.com/user-attachments/assets/bb1c71f6-f862-48fc-b864-d24f383d0508" />
+- Benign <img width="357" height="273" alt="benign (2)" src="https://github.com/user-attachments/assets/bb1c71f6-f862-48fc-b864-d24f383d0508" />
 
-- Malignant <img width="449" height="598" alt="malignant (1)" src="https://github.com/user-attachments/assets/b81889cf-1e30-473a-99aa-44c8faa309db" />
+- Malignant <img width="349" height="298" alt="malignant (1)" src="https://github.com/user-attachments/assets/b81889cf-1e30-473a-99aa-44c8faa309db" />
 
 
 **Dataset Source:** [https://www.kaggle.com/datasets/sabahesaraki/breast-ultrasound-images-dataset](url)
@@ -201,7 +193,7 @@ Always run the following commands from the project root directory.
 python -m tools.data_downloader
 python -m tools.data_preprocessing
 python run.py
-
+```
 ---
 
 ## 9. Limitations and Future Work
